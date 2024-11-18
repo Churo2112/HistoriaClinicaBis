@@ -1,0 +1,116 @@
+﻿@model HistoriaClinicaBis.Models.Paciente
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<div>
+	<h1>@Html.DisplayFor(model => model.nombre) @Html.DisplayFor(model => model.apellido)</h1>
+	<hr />
+	<div>
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>@Html.DisplayNameFor(model => model.fechaNacimiento)</th>
+					<td>@Html.DisplayFor(model => model.fechaNacimiento)</td>
+					<th>@Html.DisplayNameFor(model => model.dni)</th>
+					<td>@Html.DisplayFor(model => model.dni)</td>
+					<th>@Html.DisplayNameFor(model => model.cobertura)</th>
+					<td>@Html.DisplayFor(model => model.cobertura)</td>
+
+
+				</tr>
+				<tr>
+					<th>@Html.DisplayNameFor(model => model.mail)</th>
+					<td>@Html.DisplayFor(model => model.mail)</td>
+					<th>@Html.DisplayNameFor(model => model.telefono)</th>
+					<td>@Html.DisplayFor(model => model.telefono)</td>
+				</tr>
+			</tbody>
+
+		</table>
+	</div>
+</div>
+<div class="container-fluid d-inline-flex justify-content-end">
+	<a asp-action="Edit" asp-route-id="@Model?.id" asp-route-op="1" class="btn btn-success" data-bs-toggle="modal" data-bs-target="@("#EditPaciente-"+Model?.id)">Modificar</a>
+	@await Html.PartialAsync("_Edit", Model)
+</div>
+
+
+<hr />
+<!--Aquí irían las historias familiares y clínicas-->
+<div class="accordion" id="historias">
+	<div class="accordion-item">
+		<h2 class="accordion-header">
+			<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#familiar" aria-expanded="true" aria-controls="familiar">
+				@Html.DisplayNameFor(model => model.antecedentesFamiliares)
+			</button>
+		</h2>
+		<div id="familiar" class="accordion-collapse collapse show">
+			<div class="accordion-body container-fluid d-inline-flex">
+				<div class="container-fluid d-inline-flex col-10">
+					@Html.DisplayFor(model => model.antecedentesFamiliares)
+				</div>
+				<div class="container-fluid d-inline-flex justify-content-end">
+					<a asp-action="Edit" asp-route-id="@Model?.id" asp-route-op="2" class="btn btn-success" data-bs-toggle="modal" data-bs-target="@("#EditAntFamPaciente-"+Model?.id)">Modificar</a>
+					@await Html.PartialAsync("_RegFamiliar", Model)
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="accordion-item">
+		<h2 class="accordion-header">
+			<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#registros" aria-expanded="false" aria-controls="registros">
+				Historia Clínica
+			</button>
+		</h2>
+		<div id="registros" class="accordion-collapse collapse">
+			<div class="accordion-body">
+				<div class="container-fluid d-inline-flex justify-content-end">
+					<button class="btn btn-success">Agregar registro</button>
+				</div>
+
+				<table id="prodTable" class="table table-bordered" "> 
+					<thead>
+					<th>Fecha de Consulta</th>
+					<th>Motivo de Consulta</th>
+					<th>Diagnostico</th>
+					<td></td>
+					</thead>
+					@foreach (HistoriaClinica hc in ViewData["historiasClinicas"] as IList<HistoriaClinica>)
+					{
+					<tr>
+						<td>@hc.fechaConsulta</td>
+						<td>@hc.motivoDeConsulta</td>
+						<td>@hc.diagnostico</td>
+						
+						<td>
+							<a href="@Url.Action("Details", "HistoriaClinica")" class="btn btn-success"
+							   data-bs-toggle="modal" data-bs-target="@("#DetailsHc-"+hc.idHistoria)">Modificar</a>
+						</td>
+					</tr>
+					}
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	body {
+		margin-bottom: 70px;
+	}
+
+	tbody, td, tfoot, th, thead, tr {
+		border-style: none;
+	}
+
+	.accordion {
+		--bs-accordion-active-bg: white;
+		--bs-accordion-active-color: black;
+	}
+
+	.accordion-button {
+		font-size: 1.2rem;
+	}
+</style>
+

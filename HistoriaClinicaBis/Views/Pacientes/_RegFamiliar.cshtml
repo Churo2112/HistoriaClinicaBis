@@ -1,0 +1,35 @@
+﻿@model HistoriaClinicaBis.Models.Paciente
+
+<!-- Modal -->
+<div class="modal fade" id="EditAntFamPaciente-@Model.id" tabindex="-1" aria-labelledby="EditAntFamPacienteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar antecedentes familiares</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Edit" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="id" />
+                    <input type="hidden" asp-for="nombre" />
+                    <input type="hidden" asp-for="apellido" />
+                    <input type="hidden" asp-for="fechaNacimiento" />
+                    <input type="hidden" asp-for="dni" />
+                    <input type="hidden" asp-for="cobertura" />
+                    <input type="hidden" asp-for="mail" />
+                    <input type="hidden" asp-for="telefono" />
+                    <div class="form-group">
+                        <label asp-for="antecedentesFamiliares" class="control-label"></label>
+                        <input asp-for="antecedentesFamiliares" class="form-control" />
+                        <span asp-validation-for="antecedentesFamiliares" class="text-danger"></span>
+                    </div>
+                    <div class="modal-footer" style="margin-top: 5px;">
+                        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" value="Save" class="btn btn-success">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

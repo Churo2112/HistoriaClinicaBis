@@ -1,0 +1,115 @@
+﻿@{
+    ViewData["Title"] = "Búsqueda de pacientes";
+}
+<script src="https://kit.fontawesome.com/d4c9bb5d0c.js"></script>
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container" id="Dropdown">
+    <h2>Buscar por...</h2>
+    <div>
+        <select id="myDropdown">
+            <option value="dni-bar">DNI</option>
+            <option value="nya-bar">Nombre y apellido</option>
+        </select>
+    </div>
+</div>
+
+@using (Html.BeginForm("busquedaPorDni", "Pacientes", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <div class="container" id="DNIbar">
+        <input type="text" placeholder="Ingrese DNI del paciente..." name="dni" required />
+        <button class="busqueda" type="submit">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </button>
+    </div>
+}
+
+@using (Html.BeginForm("busquedaPorNombre", "Pacientes", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <div class="container" id="NyAbar">
+        <input type="text" placeholder="Ingrese nombre del paciente..." name="nombre" required />
+        <input type="text" placeholder="Ingrese apellido del paciente..." name="apellido" required />
+        <button class="busqueda" type="submit">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </button>
+    </div>
+}
+
+
+<style>
+    h1 {
+        margin-bottom: 40px;
+    }
+
+    h4 {
+        margin-top: 40px;
+    }
+
+    .container {
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
+    input {
+        padding: 10px;
+        width: 20rem;
+    }
+
+    .busqueda {
+        cursor: pointer;
+        border: 0;
+        background-color: mediumseagreen;
+        padding: 12px;
+        border-radius: 5px;
+        width: 3rem;
+        color: white;
+    }
+
+        .busqueda:hover {
+            background-color: #198754;
+        }
+
+    #Dropdown {
+        display: flex;
+    }
+
+    #NyAbar {
+        display: none
+    }
+
+    #myDropdown {
+        margin-left: 15px;
+        border: 0;
+        background-color: mediumseagreen;
+        padding: 14px;
+        border-radius: 3px;
+        color: white;
+    }
+
+        #myDropdown:hover {
+            background-color: #198754;
+        }
+
+    option {
+        color: black;
+        background-color: white;
+    }
+
+</style>
+
+<script>
+    const myDropdown = document.getElementById('myDropdown');
+    const DNIbarDiv = document.getElementById('DNIbar');
+    const NyAbarDiv = document.getElementById('NyAbar');
+
+    myDropdown.addEventListener("change", function (event) {
+        if (event.target.value == 'dni-bar') {
+            DNIbar.style.display = "block";
+            NyAbarDiv.style.display = "none";
+        } else if (event.target.value == 'nya-bar') {
+            NyAbarDiv.style.display = "block";
+            DNIbar.style.display = "none";
+        }
+    })
+</script>

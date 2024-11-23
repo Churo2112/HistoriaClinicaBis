@@ -22,15 +22,27 @@ namespace HistoriaClinicaBis.Controllers
             {
                 return NotFound();
             }
-
-            var hc = await _context.HistoriaClinica
-                .FirstOrDefaultAsync(m => m.idHistoria == id);
-            if (hc == null)
+            var registro = await _context.HistoriaClinica.FindAsync(id);
+            if (registro == null)
             {
                 return NotFound();
             }
+            return PartialView("_DetailsHC", registro);
+        }
 
-            return View(hc);
+        [Authorize]
+        public async Task<IActionResult> Create(int id)
+        {
+            return View("_CreateHc");
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("idPaciente,fechaConsulta,motivoDeConsulta,estadoActual,diagnostico,tratamiento")] HistoriaClinica historiaClinica)
+        {
+            _context.HistoriaClinica.Add(historiaClinica);
+            _context.SaveChanges();
+            return RedirectToAction("Details", "Pacientes", new { id = historiaClinica.idPaciente });
         }
     }
 }

@@ -1,31 +1,108 @@
 ﻿@model LoginViewModel
 @{
-    ViewBag.Title = "User Login";
+    Layout = null;
 }
-<h1>User Login</h1>
-<div class="row">
-    <div class="col-md-12">
-        <form method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label asp-for="RememberMe">
-                        <input asp-for="RememberMe" />
-                        @Html.DisplayNameFor(m => m.RememberMe)
-                    </label>
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="https://kit.fontawesome.com/d4c9bb5d0c.js"></script>
+</head>
+
+<div class="container h-100">
+    <div class="d-flex justify-content-center h-100">
+        <div class="user_card">
+            <div class="d-flex justify-content-center">
+                <!--Logo-->
+                <div class="brand_logo_container">
+                    <i class="fa fa-medkit fa-5x" aria-hidden="true"></i>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
+            <div class="d-flex justify-content-center form_container">
+                <form method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="input-group mb-3">
+                        <label class="container" style="padding:0;" asp-for="Email"></label>
+                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
+                        <input asp-for="Email" class="form-control" placeholder="Ingrese su dirección de e-mail" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="container" style="padding:0;" asp-for="Password"></label>
+                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-key"></i></span>
+                        <input asp-for="Password" class="form-control" placeholder="Ingrese su contraseña" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label asp-for="RememberMe">
+                                <input asp-for="RememberMe" />
+                                @Html.DisplayNameFor(m => m.RememberMe)
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-success container-fluid">Iniciar sesión</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
+
+
+
+<style>
+    .user_card {
+        height: 430px;
+        width: 500px;
+        margin-top: auto;
+        margin-bottom: auto;
+        background: #C0FFB3;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 10px;
+        -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 5px;
+    }
+
+    .brand_logo_container {
+        position: absolute;
+        height: 170px;
+        width: 170px;
+        top: -75px;
+        border-radius: 50%;
+        background: #198754;
+        padding: 10px;
+        text-align: center;
+        align-content: center;
+        color: white;
+    }
+
+    .brand_logo {
+        height: 150px;
+        width: 150px;
+        border-radius: 50%;
+        border: 2px solid white;
+    }
+
+    .form_container {
+        margin-top: 80px;
+    }
+
+    .input-group {
+        width: 20rem;
+    }
+
+    .form-control {
+        padding: 15px;
+    }
+
+    .input-group-text {
+        background-color: #198754;
+        color: white;
+        border: none;
+        padding: 20px;
+    }
+
+</style>

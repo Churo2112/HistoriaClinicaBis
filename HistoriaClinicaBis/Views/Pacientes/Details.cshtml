@@ -16,8 +16,6 @@
 					<td>@Html.DisplayFor(model => model.dni)</td>
 					<th>@Html.DisplayNameFor(model => model.cobertura)</th>
 					<td>@Html.DisplayFor(model => model.cobertura)</td>
-
-
 				</tr>
 				<tr>
 					<th>@Html.DisplayNameFor(model => model.mail)</th>
@@ -26,7 +24,6 @@
 					<td>@Html.DisplayFor(model => model.telefono)</td>
 				</tr>
 			</tbody>
-
 		</table>
 	</div>
 </div>
@@ -37,9 +34,9 @@
 
 
 <hr />
-<!--Aquí irían las historias familiares y clínicas-->
 <div class="accordion" id="historias">
 	<div class="accordion-item">
+		<!--Antecedentes familiares-->
 		<h2 class="accordion-header">
 			<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#familiar" aria-expanded="true" aria-controls="familiar">
 				@Html.DisplayNameFor(model => model.antecedentesFamiliares)
@@ -58,6 +55,7 @@
 		</div>
 	</div>
 	<div class="accordion-item">
+		<!--Historias Clínicas-->
 		<h2 class="accordion-header">
 			<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#registros" aria-expanded="false" aria-controls="registros">
 				Historia Clínica
@@ -66,29 +64,32 @@
 		<div id="registros" class="accordion-collapse collapse">
 			<div class="accordion-body">
 				<div class="container-fluid d-inline-flex justify-content-end">
-					<button class="btn btn-success">Agregar registro</button>
+					<button asp-controller="HistoriaClinica" asp-action="Create" asp-route-id="@Model?.id" class="btn btn-success" data-bs-toggle="modal" data-bs-target="@("#CreateHC-"+Model?.id)" style="margin-bottom: 0px;">
+						Agregar registro
+					</button>
+					@await Html.PartialAsync("_CreateHc", new HistoriaClinica { idPaciente = Model.id })
 				</div>
 
-				<table id="prodTable" class="table table-bordered" "> 
+				<table id="prodTable" class="table table-bordered" ">
 					<thead>
 					<th>Fecha de Consulta</th>
 					<th>Motivo de Consulta</th>
 					<th>Diagnostico</th>
 					<td></td>
 					</thead>
-					@foreach (HistoriaClinica hc in ViewData["historiasClinicas"] as IList<HistoriaClinica>)
-					{
-					<tr>
-						<td>@hc.fechaConsulta</td>
-						<td>@hc.motivoDeConsulta</td>
-						<td>@hc.diagnostico</td>
-						
-						<td>
-							<a href="@Url.Action("Details", "HistoriaClinica")" class="btn btn-success"
-							   data-bs-toggle="modal" data-bs-target="@("#DetailsHc-"+hc.idHistoria)">Modificar</a>
-						</td>
-					</tr>
-					}
+					<!--Agregar código en caso de que no existan registros para el paciente-->
+				@foreach (HistoriaClinica hc in ViewData["historiasClinicas"] as IList<HistoriaClinica>)
+				{
+						<tr>
+							<td>@hc.fechaConsulta</td>
+							<td>@hc.motivoDeConsulta</td>
+							<td>@hc.diagnostico</td>
+							<td>
+								<a asp-controller="HistoriaClinica" asp-action="Details" asp-route-id="@Model?.id" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="@("#HCDetails-" + hc.idHistoria)">Detalles</a>
+							@await Html.PartialAsync("_DetailsHC", hc)
+							</td>
+						</tr>
+				}
 				</table>
 			</div>
 		</div>

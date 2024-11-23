@@ -1,0 +1,53 @@
+﻿@model HistoriaClinicaBis.Models.HistoriaClinica
+
+@{
+    var hc = ViewBag.historia;
+}
+
+<!-- Modal -->
+<div class="modal fade" id="CreateHC-@Model.idPaciente" tabindex="-1" aria-labelledby="CreateHCLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo registro</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="HistoriaClinica" asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="idPaciente" />
+                    <div class="form-group">
+                        <!--En su lugar, estaría bueno agregar un autocompletado con javascrip-->
+                        <label asp-for="fechaConsulta" class="control-label"></label>
+                        <input asp-for="fechaConsulta" class="form-control" />
+                        <span asp-validation-for="fechaConsulta" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="motivoDeConsulta" class="control-label"></label>
+                        <input asp-for="motivoDeConsulta" class="form-control" />
+                        <span asp-validation-for="motivoDeConsulta" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="estadoActual" class="control-label"></label>
+                        <input asp-for="estadoActual" class="form-control" />
+                        <span asp-validation-for="estadoActual" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="diagnostico" class="control-label"></label>
+                        <input asp-for="diagnostico" class="form-control" />
+                        <span asp-validation-for="diagnostico" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="tratamiento" class="control-label"></label>
+                        <input asp-for="tratamiento" class="form-control" />
+                        <span asp-validation-for="tratamiento" class="text-danger"></span>
+                    </div>
+                    <div class="modal-footer" style="margin-top: 5px;">
+                        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" value="Save" class="btn btn-success">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

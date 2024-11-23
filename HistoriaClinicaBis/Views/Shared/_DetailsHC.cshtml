@@ -1,0 +1,46 @@
+﻿@model HistoriaClinicaBis.Models.HistoriaClinica
+
+<!-- Modal -->
+<div class="modal fade" id="HCDetails-@Model.idHistoria" tabindex="-1" aria-labelledby="HCDetailsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Registro clínico</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.motivoDeConsulta)</th>
+                            <td>@Html.DisplayFor(model => model.motivoDeConsulta)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.estadoActual)</th>
+                            <td>@Html.DisplayFor(model => model.estadoActual)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.diagnostico)</th>
+                            <td>@Html.DisplayFor(model => model.diagnostico)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.tratamiento)</th>
+                            <td>@Html.DisplayFor(model => model.tratamiento)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="margin-top: 5px;">
+                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

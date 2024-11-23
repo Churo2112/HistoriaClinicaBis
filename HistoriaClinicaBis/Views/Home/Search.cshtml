@@ -17,7 +17,7 @@
 
 @using (Html.BeginForm("busquedaPorDni", "Pacientes", FormMethod.Post, new { @class = "form-horizontal" }))
 {
-    <div class="container" id="DNIbar">
+    <div class="searchcontainer" id="DNIbar">
         <input type="text" placeholder="Ingrese DNI del paciente..." name="dni" required />
         <button class="busqueda" type="submit">
             <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
@@ -27,7 +27,7 @@
 
 @using (Html.BeginForm("busquedaPorNombre", "Pacientes", FormMethod.Post, new { @class = "form-horizontal" }))
 {
-    <div class="container" id="NyAbar">
+    <div class="searchcontainer" id="NyAbar">
         <input type="text" placeholder="Ingrese nombre del paciente..." name="nombre" required />
         <input type="text" placeholder="Ingrese apellido del paciente..." name="apellido" required />
         <button class="busqueda" type="submit">
@@ -46,7 +46,7 @@
         margin-top: 40px;
     }
 
-    .container {
+    .searchcontainer {
         margin-bottom: 20px;
         margin-top: 20px;
     }

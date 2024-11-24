@@ -67,7 +67,7 @@
 					<button asp-controller="HistoriaClinica" asp-action="Create" asp-route-id="@Model?.id" class="btn btn-success" data-bs-toggle="modal" data-bs-target="@("#CreateHC-"+Model?.id)" style="margin-bottom: 0px;">
 						Agregar registro
 					</button>
-					@await Html.PartialAsync("_CreateHc", new HistoriaClinica { idPaciente = Model.id })
+					@await Html.PartialAsync("~/Views/HistoriaClinica/_CreateHc.cshtml", new HistoriaClinica { idPaciente = Model.id })
 				</div>
 
 				<table id="prodTable" class="table table-bordered" ">
@@ -86,7 +86,7 @@
 							<td>@hc.diagnostico</td>
 							<td>
 								<a asp-controller="HistoriaClinica" asp-action="Details" asp-route-id="@Model?.id" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="@("#HCDetails-" + hc.idHistoria)">Detalles</a>
-							@await Html.PartialAsync("_DetailsHC", hc)
+							@await Html.PartialAsync("~/Views/HistoriaClinica/_DetailsHC.cshtml", hc)
 							</td>
 						</tr>
 				}

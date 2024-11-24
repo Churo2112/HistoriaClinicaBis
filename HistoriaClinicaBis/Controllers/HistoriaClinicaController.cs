@@ -27,13 +27,13 @@ namespace HistoriaClinicaBis.Controllers
             {
                 return NotFound();
             }
-            return PartialView("_DetailsHC", registro);
+            return PartialView("~/Views/HistoriaClinica/_DetailsHC.cshtml", registro);
         }
 
         [Authorize]
         public async Task<IActionResult> Create(int id)
         {
-            return View("_CreateHc");
+            return View("~/Views/HistoriaClinica/_CreateHc.cshtml");
         }
 
         [Authorize]

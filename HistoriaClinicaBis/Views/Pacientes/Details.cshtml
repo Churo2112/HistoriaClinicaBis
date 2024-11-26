@@ -1,4 +1,7 @@
 ﻿@model HistoriaClinicaBis.Models.Paciente
+@{
+	var re = ViewData["historiasClinicas"] as IList<HistoriaClinica>;
+}
 <head>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -74,22 +77,30 @@
 					<thead>
 					<th>Fecha de Consulta</th>
 					<th>Motivo de Consulta</th>
-					<th>Diagnostico</th>
+					<th>Diagnóstico</th>
 					<td></td>
 					</thead>
-					<!--Agregar código en caso de que no existan registros para el paciente-->
-				@foreach (HistoriaClinica hc in ViewData["historiasClinicas"] as IList<HistoriaClinica>)
-				{
-						<tr>
-							<td>@hc.fechaConsulta</td>
-							<td>@hc.motivoDeConsulta</td>
-							<td>@hc.diagnostico</td>
-							<td>
-								<a asp-controller="HistoriaClinica" asp-action="Details" asp-route-id="@Model?.id" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="@("#HCDetails-" + hc.idHistoria)">Detalles</a>
+					<tbody>
+						@if (!re.Any())
+						{
+							<tr>
+								<td colspan="3" class="no_pacient">No hay registros previos para este paciente.</td>
+							</tr>
+						}
+
+						@foreach (HistoriaClinica hc in ViewData["historiasClinicas"] as IList<HistoriaClinica>)
+						{
+							<tr>
+								<td>@hc.fechaConsulta</td>
+								<td>@hc.motivoDeConsulta</td>
+								<td>@hc.diagnostico</td>
+								<td>
+									<a asp-controller="HistoriaClinica" asp-action="Details" asp-route-id="@Model?.id" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="@("#HCDetails-" + hc.idHistoria)">Detalles</a>
 							@await Html.PartialAsync("~/Views/HistoriaClinica/_DetailsHC.cshtml", hc)
-							</td>
-						</tr>
-				}
+								</td>
+							</tr>
+						}
+					</tbody>
 				</table>
 			</div>
 		</div>
@@ -112,6 +123,11 @@
 
 	.accordion-button {
 		font-size: 1.2rem;
+	}
+
+	.no_pacient {
+		font-style: italic;
+		text-align: center;
 	}
 </style>
 

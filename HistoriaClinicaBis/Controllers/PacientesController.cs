@@ -54,7 +54,7 @@ namespace HistoriaClinicaBis.Controllers
             }
 
             IQueryable<HistoriaClinica> hc = _context.HistoriaClinica.Where(hc => hc.idPaciente == paciente.id);
-            ViewData["historiasClinicas"] = hc.ToList();
+            ViewData["historiasClinicas"] = hc.OrderByDescending(r => r.fechaConsulta).ThenByDescending(r => r.idHistoria).ToList();
 
             return View(paciente);
         }

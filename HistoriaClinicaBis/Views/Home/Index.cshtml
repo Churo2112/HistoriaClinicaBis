@@ -1,12 +1,23 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@{
     ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="text-center">
     <h1 class="display-4">Bienvenido</h1>
     <h2>Sistema de gestión de historias médicas</h2>
     <p>Si desea buscar un paciente seleccione la pestaña "Búsqueda".</p>
 </div>
+}else{
+    <div class="text-center">
+        <h1 class="display-4">Bienvenido</h1>
+        <h2>Sistema de gestión de historias médicas</h2>
+        <p>Para usar el sistema se debe loguear.</p>
+    </div>
+}
 
 <style>
     .text-center{

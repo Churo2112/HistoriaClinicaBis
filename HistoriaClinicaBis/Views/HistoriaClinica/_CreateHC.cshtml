@@ -16,12 +16,7 @@
                 <form asp-controller="HistoriaClinica" asp-action="Create" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="idPaciente" />
-                    <div class="form-group">
-                        <!--En su lugar, estaría bueno agregar un autocompletado con javascrip-->
-                        <label asp-for="fechaConsulta" class="control-label"></label>
-                        <input asp-for="fechaConsulta" class="form-control" />
-                        <span asp-validation-for="fechaConsulta" class="text-danger"></span>
-                    </div>
+
                     <div class="form-group">
                         <label asp-for="motivoDeConsulta" class="control-label"></label>
                         <input asp-for="motivoDeConsulta" class="form-control" />

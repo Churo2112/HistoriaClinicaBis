@@ -40,6 +40,7 @@ namespace HistoriaClinicaBis.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([Bind("idPaciente,fechaConsulta,motivoDeConsulta,estadoActual,diagnostico,tratamiento")] HistoriaClinica historiaClinica)
         {
+            historiaClinica.fechaConsulta = DateTime.Now.ToString("dd-MM-yyyy");
             _context.HistoriaClinica.Add(historiaClinica);
             _context.SaveChanges();
             return RedirectToAction("Details", "Pacientes", new { id = historiaClinica.idPaciente });
